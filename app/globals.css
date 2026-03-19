@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #6EE7B7;
+  --secondary: #F472B6;
+  --accent: #60A5FA;
+  --gold: #FBBF24;
+  --bg: #050508;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) var(--bg);
+  cursor: none;
+}
+html::-webkit-scrollbar { width: 3px; }
+html::-webkit-scrollbar-track { background: var(--bg); }
+html::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 2px; }
+
+body {
+  background: var(--bg);
+  color: #F0F0FF;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ── CUSTOM CURSOR ─────────────────────────────────────── */
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+}
+.cursor-ring {
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--primary);
+  border-radius: 50%;
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease-out, width 0.25s, height 0.25s, opacity 0.25s;
+  opacity: 0.5;
+}
+body:has(a:hover) .cursor-ring,
+body:has(button:hover) .cursor-ring { width: 56px; height: 56px; opacity: 0.8; }
+
+/* ── GRAIN OVERLAY ─────────────────────────────────────── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 100; opacity: 0.35;
+}
+
+/* ── GRADIENT TEXT ─────────────────────────────────────── */
+.gt-mint { background: linear-gradient(135deg,#6EE7B7,#60A5FA); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.gt-pink { background: linear-gradient(135deg,#F472B6,#FBBF24); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.gt-full { background: linear-gradient(135deg,#6EE7B7 0%,#60A5FA 35%,#F472B6 70%,#FBBF24 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; background-size: 300%; animation: shimmer 5s linear infinite; }
+
+/* ── GLOW HELPERS ──────────────────────────────────────── */
+.glow-mint  { box-shadow: 0 0 40px rgba(110,231,183,0.25); }
+.glow-pink  { box-shadow: 0 0 40px rgba(244,114,182,0.25); }
+.glow-blue  { box-shadow: 0 0 40px rgba(96,165,250,0.25); }
+
+/* ── CARDS ─────────────────────────────────────────────── */
+.card-glass {
+  background: rgba(19,19,28,0.6);
+  border: 1px solid rgba(31,31,46,0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.card-hover { transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s; }
+.card-hover:hover { transform: translateY(-8px); }
+
+/* ── MARQUEE ───────────────────────────────────────────── */
+.marquee-track { display:flex; width:max-content; animation: marquee 28s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── SELECTION ─────────────────────────────────────────── */
+::selection { background: var(--primary); color: #050508; }
+
+/* ── SECTION LABEL ─────────────────────────────────────── */
+.section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
