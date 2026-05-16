@@ -32,7 +32,7 @@ const PROJECTS = [
     grad: "from-[#6EE7B7]/20 to-[#60A5FA]/20",
     badge: "Full Stack",
     github: "https://github.com/Sandeep2924/Zyagra",
-    live: null,
+    live: "https://zyagra.vercel.app/",
     img: null,
     featured: true,
   },
@@ -211,7 +211,7 @@ function ProjectMockup({
             <Icon size={12} style={{ color }} />
           </div>
           <div className="font-mono text-[9px]" style={{ color }}>
-            BhashaBot AI
+            NotesAI
           </div>
           <div className="ml-auto w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
         </div>
@@ -344,12 +344,12 @@ function ProjectMockup({
         </div>
       </div>
     ),
-    // DriveEase — car rental UI
+    // ZoomCarz — car rental UI
     4: (
       <div className="absolute inset-0 p-3 flex flex-col gap-2 opacity-60">
         <div className="flex gap-2 items-center">
           <div className="font-mono text-[9px] font-bold" style={{ color }}>
-            🚗 DriveEase
+            🚗 ZoomCarz
           </div>
           <div className="ml-auto flex gap-1">
             {["Home", "Fleet", "Book", "Admin"].map((t) => (
