@@ -2,80 +2,91 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Download } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 const NAV = [
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#contact', label: 'Contact' },
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen]         = useState(false)
-  const [active, setActive]     = useState('')
+  const pathname = usePathname()
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 50)
+    const fn = () => setScrolled(window.scrollY > 30)
     window.addEventListener('scroll', fn)
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  const go = (href: string) => {
-    setOpen(false); setActive(href)
-    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
-  }
+  // Close mobile nav on path change
+  useEffect(() => {
+    setOpen(false)
+  }, [pathname])
 
   return (
     <>
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.22,1,0.36,1] }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-bg/70 backdrop-blur-2xl border-b border-border' : ''
+          scrolled ? 'bg-bg/75 backdrop-blur-2xl border-b border-border py-3' : 'py-5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           {/* Logo */}
-          <motion.button onClick={() => window.scrollTo({ top:0, behavior:'smooth' })}
-            whileHover={{ scale: 1.04 }}
-            className="font-display font-bold text-lg tracking-tight"
-          >
-            <span className="gt-mint">SK</span>
-            <span className="text-text-secondary font-body font-normal text-sm ml-1.5">portfolio</span>
-          </motion.button>
+          <Link href="/" className="font-display font-bold text-2xl tracking-tight text-primary hover:opacity-80 transition-opacity">
+            SANDEEP.
+          </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1">
-            {NAV.map(n => (
-              <motion.button key={n.href} onClick={() => go(n.href)}
-                className={`relative px-4 py-2 text-sm font-body rounded-full transition-colors ${
-                  active === n.href ? 'text-text-primary' : 'text-text-secondary hover:text-text-primary'
-                }`}
-                whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}
-              >
-                {active === n.href && (
-                  <motion.span layoutId="nav-pill" transition={{ type:'spring', stiffness:400, damping:30 }}
-                    className="absolute inset-0 bg-surface border border-border rounded-full" />
-                )}
-                <span className="relative z-10">{n.label}</span>
-              </motion.button>
-            ))}
+          <div className="hidden md:flex items-center">
+            {NAV.map((n, idx) => {
+              const active = pathname === n.href
+              return (
+                <div key={n.href} className="flex items-center">
+                  <Link href={n.href} className="relative">
+                    <motion.div
+                      className={`px-3 py-2 text-sm font-body transition-colors relative z-10 ${
+                        active ? 'text-primary font-medium' : 'text-text-secondary hover:text-primary'
+                      }`}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {active && (
+                        <motion.span
+                          layoutId="nav-underline"
+                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                          className="absolute left-3 right-3 bottom-1 h-[2px] bg-gold rounded-full -z-10"
+                        />
+                      )}
+                      <span>{n.label}</span>
+                    </motion.div>
+                  </Link>
+                  {idx < NAV.length - 1 && (
+                    <span className="text-border mx-1 font-light">|</span>
+                  )}
+                </div>
+              )
+            })}
+          </div>
 
-            {/* Resume Download Button */}
-            <motion.a
-              href="/Sandeep_Kumar_Resume.pdf"
-              download="Sandeep_Kumar_Resume.pdf"
-              className="ml-3 flex items-center gap-2 px-5 py-2 rounded-full font-display font-semibold text-sm text-bg"
-              style={{ background: 'linear-gradient(135deg,#6EE7B7,#60A5FA)' }}
-              whileHover={{ scale: 1.05, y: -1 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Download size={14} />
-              Resume
-            </motion.a>
+          {/* Hire Me Button */}
+          <div className="hidden md:block">
+            <Link href="/contact">
+              <motion.div
+                className="flex items-center gap-2 px-6 py-2.5 rounded shadow-md font-body font-medium text-sm bg-gold-solid hover:opacity-90 transition-opacity"
+                whileHover={{ scale: 1.05, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                Hire Me
+              </motion.div>
+            </Link>
           </div>
 
           {/* Mobile toggle */}
@@ -88,21 +99,43 @@ export default function Navbar() {
       {/* Mobile menu */}
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:hidden"
           >
-            {NAV.map((n, i) => (
-              <motion.button key={n.href} onClick={() => go(n.href)}
-                initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay: i*0.07 }}
-                className="font-display font-bold text-4xl text-text-primary hover:text-primary transition-colors"
-              >{n.label}</motion.button>
-            ))}
-            <motion.a href="/Sandeep_Kumar_Resume.pdf" download
-              initial={{ opacity:0, y:20 }} animate={{ opacity:1, y:0 }} transition={{ delay: 0.4 }}
+            {NAV.map((n, i) => {
+              const active = pathname === n.href
+              return (
+                <motion.div
+                  key={n.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.07 }}
+                >
+                  <Link
+                    href={n.href}
+                    onClick={() => setOpen(false)}
+                    className={`font-display font-bold text-4xl hover:text-primary transition-colors ${
+                      active ? 'text-primary' : 'text-text-primary'
+                    }`}
+                  >
+                    {n.label}
+                  </Link>
+                </motion.div>
+              )
+            })}
+            <motion.a
+              href="/Sandeep_Kumar_Resume.pdf"
+              download
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
               className="flex items-center gap-2 px-8 py-3 rounded-full font-display font-bold text-bg"
-              style={{ background:'linear-gradient(135deg,#6EE7B7,#60A5FA)' }}
+              style={{ background: 'linear-gradient(135deg,#6EE7B7,#60A5FA)' }}
             >
-              <Download size={16}/> Download Resume
+              <Download size={16} /> Download Resume
             </motion.a>
           </motion.div>
         )}

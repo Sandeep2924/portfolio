@@ -1,36 +1,42 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
-import { Briefcase, GraduationCap, Award, FlaskConical } from 'lucide-react'
+import { GraduationCap, Award, FlaskConical } from 'lucide-react'
 import Reveal from '../ui/Reveal'
 
 const ITEMS = [
   {
-    icon: Briefcase,
-    title: 'Full Stack Developer Intern',
-    org: 'Jobiffi.com', loc: 'Noida, Uttar Pradesh, India', period: 'May 2026 - Jul 2026',
-    bullets: [
-      'Coded the frontend for a job board platform in React.js alongside backend services in Express.js and Node.js, covering authentication and real-time notification systems.'
+    icon: FlaskConical,
+    title:'IEEE Research Publication',
+    org:'Simulating the Indian Chemical Exposome', loc:'Multimodal Transfer Learning Framework', period:'2024 – Present',
+    bullets:[
+      'Developed a multimodal deep learning framework for predicting heavy metal bioaccumulation.',
+      'Applied domain adaptation techniques on heterogeneous environmental datasets.',
+      <span key="ieee">Paper published in <a href="https://ieeexplore.ieee.org/document/11576905" target="_blank" rel="noopener noreferrer" className="underline font-medium hover:text-gold transition-colors">IEEE Xplore</a>.</span>,
     ],
   },
   {
-    icon: Briefcase,
-    title: 'Analyst Intern, Subscriber Services Group',
-    org: 'Priority', loc: 'Chandigarh, India', period: 'Jan 2025 - Jun 2025',
-    bullets: [
-      'Implemented transaction validation logic across 6+ internal portals, improving data accuracy by 35%.',
-      'Introduced client-side state management that cut reconciliation effort by 40%, and tested layouts across 5+ configurations.',
-    ],
+    icon: GraduationCap,
+    title:'Master of Computer Applications (MCA)',
+    org:'CHRIST (Deemed to be University)', loc:'Delhi NCR, Ghaziabad', period:'2025 – Expected May 2027',
+    bullets:['GPA: 3.29 / 4.0','Specialization: AI/ML & Web Engineering'],
   },
   {
-    icon: Briefcase,
-    title: 'Intern',
-    org: 'Supof.in', loc: 'Chandigarh, Chandigarh, India', period: 'Sep 2022 - Mar 2023',
-    bullets: [
-      'Created 10+ reusable UI components, reducing duplicate code by 35% in the codebase.',
-      'Delivered mobile-friendly page layouts using HTML5, CSS3, and Bootstrap.',
+    icon: GraduationCap,
+    title:'Master of Computer Applications (MCA)',
+    org:'Chandigarh University', loc:'Mohali, Punjab', period:'Completed May 2025',
+    bullets:['GPA: 6.97 / 10'],
+  },
+  {
+    icon: Award,
+    title:'Certifications',
+    org:'NPTEL · Johns Hopkins · Rice University (Coursera)', loc:'', period:'2023 – 2024',
+    bullets:[
+      'Privacy & Security in Online Social Media — NPTEL Govt. of India, 12-Week | 2023',
+      'HTML, CSS & JS for Web Developers — Johns Hopkins University | 2024',
+      'Interactive Programming in Python — Rice University | 2024',
     ],
-  }
+  },
 ]
 
 function Item({ item, index }: { item: typeof ITEMS[0]; index: number }) {
@@ -81,16 +87,16 @@ function Item({ item, index }: { item: typeof ITEMS[0]; index: number }) {
   )
 }
 
-export default function Experience() {
+export default function Education() {
   return (
-    <section id="experience" className="py-24 px-6 relative bg-bg">
+    <section id="education" className="pb-24 pt-12 px-6 relative bg-bg">
       <div className="max-w-4xl mx-auto">
         <Reveal className="text-center mb-20">
           <h2 className="font-display font-extrabold text-4xl md:text-5xl text-primary uppercase tracking-tight">
-            Professional Journey
+            Education & Research
           </h2>
           <p className="text-text-secondary mt-4 max-w-xl mx-auto font-body">
-            A timeline of my work experience, research, education, and technical certifications.
+            A timeline of my academic background and scientific contributions.
           </p>
         </Reveal>
 

@@ -1,28 +1,31 @@
 'use client'
-import Cursor from '@/components/ui/Cursor'
-import Navbar from '@/components/Navbar'
 import Hero from '@/components/sections/Hero'
-import About from '@/components/sections/About'
+import FeaturedProjects from '@/components/sections/FeaturedProjects'
 import Skills from '@/components/sections/Skills'
-import Projects from '@/components/sections/Projects'
 import Experience from '@/components/sections/Experience'
-import Contact from '@/components/sections/Contact'
-import Footer from '@/components/Footer'
+import Education from '@/components/sections/Education'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { ArrowRight, Sparkles, Send, User } from 'lucide-react'
+import Reveal from '@/components/ui/Reveal'
 
 export default function Home() {
   return (
-    <>
-      <Cursor />
-      <main className="relative min-h-screen bg-bg overflow-x-hidden">
-        <Navbar />
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Experience />
-        <Contact />
-        <Footer />
-      </main>
-    </>
+    <div className="relative min-h-screen bg-bg overflow-x-hidden">
+      <Hero />
+      
+      {/* Featured Projects Grid */}
+      <FeaturedProjects />
+
+      {/* Skills */}
+      <Skills />
+
+      {/* Experience Timeline */}
+      <Experience />
+
+      {/* Education & Research Timeline */}
+      <Education />
+
+    </div>
   )
 }

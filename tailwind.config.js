@@ -4,20 +4,20 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['Clash Display', 'Syne', 'sans-serif'],
-        body: ['Satoshi', 'DM Sans', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        display: ['"Playfair Display"', 'serif'],
+        body: ['"DM Sans"', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace'],
       },
       colors: {
-        bg: '#050508',
-        surface: '#0e0e14',
-        card: '#13131c',
-        border: '#1f1f2e',
-        primary: '#6EE7B7',    // mint green — fresh, energetic
-        secondary: '#F472B6',  // hot pink
-        accent: '#60A5FA',     // sky blue
-        gold: '#FBBF24',       // amber
-        text: { primary: '#F0F0FF', secondary: '#8888AA', muted: '#44445A' },
+        bg: '#FDFBF7',
+        surface: '#FFFFFF',
+        card: '#FDFBF7',
+        border: '#E2E8F0',
+        primary: { DEFAULT: '#0F172A', light: '#1E293B', dark: '#020617' },
+        secondary: { DEFAULT: '#D4AF37', light: '#F1D570', dark: '#997A15' },
+        accent: '#D4AF37',
+        gold: '#D4AF37',
+        text: { primary: '#0F172A', secondary: '#475569', muted: '#64748B' },
       },
       animation: {
         'spin-slow': 'spin 25s linear infinite',

@@ -85,7 +85,7 @@ export default function About() {
             <Reveal delay={0.2}>
               <p className="text-text-secondary text-base leading-relaxed">
                 Outside of code, I'm an active <span className="text-accent font-medium">IEEE researcher</span> —
-                my multimodal transfer learning paper on India's chemical exposome is currently under peer review.
+                my multimodal transfer learning paper on India's chemical exposome has been published in IEEE Transactions.
               </p>
             </Reveal>
 
