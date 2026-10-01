@@ -12,6 +12,8 @@ import {
   Search,
 } from 'lucide-react'
 import Reveal from '../ui/Reveal'
+import ProjectModal, { ProjectData } from '../modals/ProjectModal'
+import { Workflow } from 'lucide-react'
 
 export const PROJECTS = [
   {
@@ -28,6 +30,66 @@ export const PROJECTS = [
     live: "https://retain-ai-olive.vercel.app/",
     img: null,
     featured: true,
+    architecture: {
+      overview: "RetainAI is an end-to-end customer retention intelligence platform. It tracks user behavior telemetry, calculates recency, frequency, and monetary (RFM) engagement scores, and employs predictive machine learning models to identify at-risk customers with automated retention intervention suggestions.",
+      diagram: [
+        {
+          step: "01",
+          title: "Telemetry & UI",
+          tech: "React 18 / Tailwind / Vercel",
+          description: "Interactive dashboard displaying cohort health, retention curves, and churn probability meters.",
+          type: "client" as const,
+        },
+        {
+          step: "02",
+          title: "API & Ingestion Gateway",
+          tech: "Express.js / Node.js REST API",
+          description: "Ingests client behavioral events, applies JWT verification, and processes batch session payloads.",
+          type: "api" as const,
+        },
+        {
+          step: "03",
+          title: "Churn Prediction Engine",
+          tech: "Machine Learning / Scikit-Learn",
+          description: "Extracts behavioral features, runs classification models, and outputs dynamic churn risk percentiles.",
+          type: "ml" as const,
+        },
+        {
+          step: "04",
+          title: "Data & Intervention Store",
+          tech: "MongoDB / Cloud Store",
+          description: "Persists customer event time-series, historical risk scores, and automated campaign tracking.",
+          type: "database" as const,
+        },
+      ],
+      layers: [
+        {
+          title: "Client & Analytical Visualizations",
+          tech: ["React.js", "Next.js", "Tailwind CSS", "Framer Motion"],
+          details: "Modular component architecture providing responsive data tables, churn risk heatmaps, and strategy controls.",
+        },
+        {
+          title: "API & Authentication Layer",
+          tech: ["Node.js", "Express.js", "JWT", "REST API"],
+          details: "Microservice-ready REST endpoints with rate limiting, input sanitization, and structured error responses.",
+        },
+        {
+          title: "Predictive AI & Feature Engineering",
+          tech: ["Python", "Scikit-Learn", "RFM Scoring", "Decision Trees"],
+          details: "Calculates customer lifetime value (CLV) and predicts churn probability based on historical usage decay.",
+        },
+        {
+          title: "Storage & Deployment Infrastructure",
+          tech: ["MongoDB Atlas", "Vercel", "Git CI/CD"],
+          details: "Continuous deployment on Vercel with high-availability database cluster and indexing on customer IDs.",
+        },
+      ],
+      highlights: [
+        "Real-time predictive churn probability scoring and risk stratification",
+        "Automated retention recommendations based on engagement thresholds",
+        "Full-stack decoupled architecture with high-performance REST APIs",
+      ],
+    },
   },
   {
     id: 1,
@@ -43,6 +105,61 @@ export const PROJECTS = [
     live: "https://zyagra.vercel.app/",
     img: "/projects/zyagra.png",
     featured: true,
+    architecture: {
+      overview: "Zyagra eliminates agricultural middlemen by providing a transparent digital marketplace where verified farmers directly list their produce, negotiate with wholesale buyers, and process verifiable orders.",
+      diagram: [
+        {
+          step: "01",
+          title: "Multi-Role Client Portal",
+          tech: "React.js / Responsive UI",
+          description: "Custom role-tailored dashboards for Farmers (commodity listings), Buyers (bidding/procurement), and Admins.",
+          type: "client" as const,
+        },
+        {
+          step: "02",
+          title: "API Gateway & Security",
+          tech: "Express.js / JWT Auth",
+          description: "Route guard middleware enforcing Role-Based Access Control (RBAC) and validating transaction payloads.",
+          type: "api" as const,
+        },
+        {
+          step: "03",
+          title: "Inventory & Order Engine",
+          tech: "Node.js REST Services",
+          description: "Real-time stock validation, automated price discovery algorithms, and payment state machines.",
+          type: "api" as const,
+        },
+        {
+          step: "04",
+          title: "Document Persistence",
+          tech: "MongoDB / Mongoose",
+          description: "Normalized collections for agricultural produce, bidding histories, user profiles, and order invoices.",
+          type: "database" as const,
+        },
+      ],
+      layers: [
+        {
+          title: "Frontend Experience",
+          tech: ["React.js", "Tailwind CSS", "Axios", "Context API"],
+          details: "State management for multi-step product uploading, real-time bidding, and responsive order tables.",
+        },
+        {
+          title: "Security & Middleware",
+          tech: ["JWT", "Bcrypt", "CORS", "Express Validator"],
+          details: "Stateless token-based authentication with encrypted password credentials and request sanitization.",
+        },
+        {
+          title: "Database Architecture",
+          tech: ["MongoDB Atlas", "Mongoose ORM"],
+          details: "Geospatial queries for local agricultural sourcing and indexed lookups on crop categories.",
+        },
+      ],
+      highlights: [
+        "End-to-end role-based access control (Farmer, Buyer, Admin)",
+        "Real-time commodity inventory management and transaction flows",
+        "Streamlined supply chain connectivity cutting intermediary fees",
+      ],
+    },
   },
   {
     id: 2,
@@ -58,6 +175,56 @@ export const PROJECTS = [
     live: "https://notes-ai.vercel.app/",
     img: "/projects/notesai.png",
     featured: true,
+    architecture: {
+      overview: "NotesAI leverages Retrieval-Augmented Generation (RAG) and natural language pipelines to allow students and researchers to interactively converse with complex academic textbooks, research papers, and multilingual notes.",
+      diagram: [
+        {
+          step: "01",
+          title: "Document Studio Interface",
+          tech: "Next.js / React UI",
+          description: "Split-view PDF reader with real-time streaming AI chat and multilingual language selectors.",
+          type: "client" as const,
+        },
+        {
+          step: "02",
+          title: "Extraction & Chunking",
+          tech: "PyPDF / OCR Extractors",
+          description: "Tokenizes unstructured documents into semantic paragraphs with preserved heading hierarchies.",
+          type: "api" as const,
+        },
+        {
+          step: "03",
+          title: "Vector Embeddings & RAG",
+          tech: "OpenAI API / Vector Search",
+          description: "Computes dense text embeddings, retrieves relevant chunks via cosine similarity, and synthesizes answers.",
+          type: "ml" as const,
+        },
+        {
+          step: "04",
+          title: "Session & Vector Store",
+          tech: "Cloud Vector DB / Cache",
+          description: "Indexes document embeddings for fast sub-second semantic retrieval across thousands of pages.",
+          type: "database" as const,
+        },
+      ],
+      layers: [
+        {
+          title: "User Interface",
+          tech: ["Next.js", "Tailwind CSS", "Framer Motion", "Markdown Parser"],
+          details: "Interactive split-screen PDF preview and conversational stream output.",
+        },
+        {
+          title: "NLP & LLM Pipelines",
+          tech: ["Python", "OpenAI LLMs", "LangChain", "Text Embeddings"],
+          details: "Semantic chunking, context injection, and hallucination reduction via grounded document references.",
+        },
+      ],
+      highlights: [
+        "Retrieval-Augmented Generation (RAG) architecture for factual grounding",
+        "Multilingual summarization and cross-lingual question answering",
+        "Sub-second vector semantic search over complex research documents",
+      ],
+    },
   },
   {
     id: 3,
@@ -73,6 +240,56 @@ export const PROJECTS = [
     live: "https://forecasting-bit-coins.vercel.app/",
     img: "/projects/cryptolens.png",
     featured: true,
+    architecture: {
+      overview: "CryptoLens captures non-linear temporal dependencies in financial market data through a recurrent neural network architecture, forecasting multi-day price movements from historical OHLCV series.",
+      diagram: [
+        {
+          step: "01",
+          title: "Financial Dashboard UI",
+          tech: "React.js / Chart.js",
+          description: "Interactive candlestick charts, confidence bands, and forecasted price trajectory overlays.",
+          type: "client" as const,
+        },
+        {
+          step: "02",
+          title: "Market Ingestion Feed",
+          tech: "Yahoo Finance API / REST",
+          description: "Pulls real-time Open, High, Low, Close, and Volume indicators for cryptocurrencies and equities.",
+          type: "api" as const,
+        },
+        {
+          step: "03",
+          title: "2-Layer LSTM Model",
+          tech: "TensorFlow / Keras / PyTorch",
+          description: "Stacked recurrent layers with Dropout (0.2) and Adam optimizer minimizing MSE loss over sequential data.",
+          type: "ml" as const,
+        },
+        {
+          step: "04",
+          title: "Inference Cache",
+          tech: "Python Engine / Cloud Host",
+          description: "Calculates rolling inference windows and serves cached predictions to client visualizers.",
+          type: "database" as const,
+        },
+      ],
+      layers: [
+        {
+          title: "Client & Visualization",
+          tech: ["React.js", "Chart.js", "Tailwind CSS"],
+          details: "Responsive financial visualizer comparing simulated forecasts against actual market closes.",
+        },
+        {
+          title: "Machine Learning Pipeline",
+          tech: ["Python", "Keras", "TensorFlow", "Pandas", "NumPy"],
+          details: "Sliding-window sequence generation with MinMaxScaler normalization (0, 1) and inverse transforms.",
+        },
+      ],
+      highlights: [
+        "Stacked 2-layer LSTM neural network architecture for sequential data",
+        "Real-time financial ingestion with automated feature normalization",
+        "Interactive comparison of predictions with historical validation curves",
+      ],
+    },
   },
   {
     id: 4,
@@ -103,12 +320,62 @@ export const PROJECTS = [
     live: "https://ieeexplore.ieee.org/document/11576905",
     img: "/projects/exposome.png",
     featured: true,
+    architecture: {
+      overview: "Published in IEEE Xplore, this environmental AI research introduces a multimodal transfer learning model with domain adaptation to predict toxic heavy metal bioaccumulation across heterogeneous geographical regions in India.",
+      diagram: [
+        {
+          step: "01",
+          title: "Multi-Source Exposome Data",
+          tech: "Heterogeneous Datasets",
+          description: "Aggregates groundwater, soil composition, and human bioaccumulation records across India.",
+          type: "client" as const,
+        },
+        {
+          step: "02",
+          title: "Feature Normalization",
+          tech: "Data Science / Pandas",
+          description: "Multivariate outlier detection, cross-regional imputation, and geochemical feature alignment.",
+          type: "api" as const,
+        },
+        {
+          step: "03",
+          title: "Transfer Learning Model",
+          tech: "PyTorch / Domain Adaptation",
+          description: "Cross-domain deep learning network bridging disparate regional environmental data distributions.",
+          type: "ml" as const,
+        },
+        {
+          step: "04",
+          title: "IEEE Publication & Peer Review",
+          tech: "Scientific Validation",
+          description: "Empirically validated models and methodology indexed in IEEE Transactions (#11576905).",
+          type: "database" as const,
+        },
+      ],
+      layers: [
+        {
+          title: "Data Engineering",
+          tech: ["Python", "NumPy", "Pandas", "SciPy"],
+          details: "Cleaning and domain normalization of non-stationary Indian geochemical exposome data.",
+        },
+        {
+          title: "Model Architecture",
+          tech: ["PyTorch", "Transfer Learning", "Domain Adaptation"],
+          details: "Deep neural network architecture designed to overcome spatial distribution shifts.",
+        },
+      ],
+      highlights: [
+        "Peer-reviewed scientific research published in IEEE Xplore",
+        "Novel domain adaptation framework solving cross-regional environmental heterogeneity",
+        "Validated predictive accuracy for chemical bioaccumulation toxicity",
+      ],
+    },
   },
 ]
 
 const FILTERS = ["All", "Full Stack", "AI / NLP", "Deep Learning", "IEEE Research"]
 
-function ProjectCard({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
+function ProjectCard({ p, i, onSelect }: { p: typeof PROJECTS[0]; i: number; onSelect: (p: typeof PROJECTS[0]) => void }) {
   const Icon = p.icon
   return (
     <motion.div
@@ -118,7 +385,8 @@ function ProjectCard({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.4, delay: i * 0.05 }}
-      className="group relative rounded-3xl border border-border bg-card overflow-hidden card-hover"
+      onClick={() => onSelect(p)}
+      className="group relative rounded-3xl border border-border bg-card overflow-hidden card-hover cursor-pointer"
       style={{ '--hover-color': p.color } as CSSProperties}
     >
       {/* Visual Banner */}
@@ -130,8 +398,13 @@ function ProjectCard({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
             className="w-full h-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-500 opacity-75 group-hover:opacity-100"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Icon size={48} style={{ color: p.color, opacity: 0.3 }} />
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2">
+            <div className="w-12 h-12 rounded-xl bg-gold/15 flex items-center justify-center text-gold border border-gold/30 group-hover:scale-110 transition-transform">
+              <Workflow size={24} />
+            </div>
+            <span className="text-xs font-mono font-medium text-text-muted">
+              Inspect Architecture
+            </span>
           </div>
         )}
         {/* Gradient Overlay */}
@@ -184,31 +457,46 @@ function ProjectCard({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
           ))}
         </div>
 
-        {/* Repository/Demo Links */}
-        <div className="flex items-center gap-4 pt-3 border-t border-border">
-          {p.github && (
-            <motion.a
-              href={p.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-text-secondary hover:text-text-primary transition-colors font-mono"
-              whileHover={{ x: 2 }}
-            >
-              <Github size={13} /> View Code
-            </motion.a>
-          )}
-          {p.live && (
-            <motion.a
-              href={p.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs font-mono hover:opacity-80 transition-opacity"
-              style={{ color: p.color }}
-              whileHover={{ x: 2 }}
-            >
-              <ExternalLink size={13} /> {p.badge === 'IEEE Research' ? 'Read Paper' : 'Live Demo'}
-            </motion.a>
-          )}
+        {/* Repository/Demo/Architecture Links */}
+        <div className="flex items-center justify-between pt-3 border-t border-border">
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation()
+              onSelect(p)
+            }}
+            className="flex items-center gap-1.5 text-xs font-mono font-semibold text-gold hover:text-gold/80 transition-colors"
+          >
+            <Workflow size={13} /> Architecture Diagram
+          </button>
+
+          <div className="flex items-center gap-3" onClick={(e) => e.stopPropagation()}>
+            {p.github && (
+              <motion.a
+                href={p.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-xs text-text-secondary hover:text-text-primary transition-colors font-mono"
+                whileHover={{ x: 2 }}
+                title="View Code"
+              >
+                <Github size={13} /> Code
+              </motion.a>
+            )}
+            {p.live && (
+              <motion.a
+                href={p.live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-xs font-mono hover:opacity-80 transition-opacity"
+                style={{ color: p.color }}
+                whileHover={{ x: 2 }}
+                title="Live Demo"
+              >
+                <ExternalLink size={13} /> {p.badge === 'IEEE Research' ? 'Paper' : 'Live'}
+              </motion.a>
+            )}
+          </div>
         </div>
       </div>
 
@@ -224,6 +512,7 @@ function ProjectCard({ p, i }: { p: typeof PROJECTS[0]; i: number }) {
 export default function Projects() {
   const [filter, setFilter] = useState("All")
   const [search, setSearch] = useState("")
+  const [selectedProject, setSelectedProject] = useState<ProjectData | null>(null)
 
   const filteredProjects = PROJECTS.filter((p) => {
     const matchesFilter =
@@ -252,7 +541,7 @@ export default function Projects() {
             Things I've <span className="gt-mint">Shipped</span>
           </h2>
           <p className="text-text-secondary mt-4 max-w-xl mx-auto">
-            Explore production applications, algorithms, and publications.
+            Explore production applications, algorithms, and publications with interactive architecture diagrams.
           </p>
         </Reveal>
 
@@ -296,7 +585,12 @@ export default function Projects() {
         <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((p, i) => (
-              <ProjectCard key={p.id} p={p} i={i} />
+              <ProjectCard
+                key={p.id}
+                p={p}
+                i={i}
+                onSelect={(proj) => setSelectedProject(proj as unknown as ProjectData)}
+              />
             ))}
           </AnimatePresence>
         </motion.div>
@@ -312,6 +606,13 @@ export default function Projects() {
           </motion.div>
         )}
       </div>
+
+      {/* Architecture Pop-up Modal */}
+      <ProjectModal
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   )
 }
