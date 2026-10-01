@@ -553,10 +553,10 @@ export default function Projects() {
               <motion.button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-4.5 py-2 rounded-full text-xs font-mono border transition-all ${
+                className={`px-5 py-2.5 rounded-full text-xs font-mono font-medium whitespace-nowrap inline-flex items-center justify-center border transition-all ${
                   filter === f
-                    ? 'bg-primary text-bg border-primary'
-                    : 'border-border text-text-secondary hover:border-primary/40 hover:text-text-primary bg-surface/40'
+                    ? 'bg-primary text-surface border-primary shadow-sm'
+                    : 'border-border/80 text-text-secondary hover:border-gold hover:text-primary bg-surface shadow-sm'
                 }`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
