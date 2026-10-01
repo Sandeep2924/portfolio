@@ -17,137 +17,138 @@ export default function Navbar() {
   const [open, setOpen]         = useState(false)
   const pathname = usePathname()
 
+  // Track scroll position immediately on mount and on scroll
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 30)
-    window.addEventListener('scroll', fn)
-    return () => window.removeEventListener('scroll', fn)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Close mobile nav on path change
+  // Close mobile nav on route change
   useEffect(() => {
     setOpen(false)
   }, [pathname])
 
+  // Prevent background scrolling when mobile menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [open])
+
   return (
     <>
-      <motion.nav
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-bg/75 backdrop-blur-2xl border-b border-border py-3' : 'py-5'
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-bg/95 backdrop-blur-md shadow-sm border-b border-border/70 py-3'
+            : 'bg-bg/80 backdrop-blur-sm border-b border-border/30 py-4 sm:py-5'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="font-display font-bold text-xl sm:text-2xl tracking-tight text-primary hover:opacity-80 transition-opacity">
+          <Link
+            href="/"
+            onClick={() => setOpen(false)}
+            className="font-display font-bold text-xl sm:text-2xl tracking-tight text-primary hover:opacity-80 transition-opacity"
+          >
             SANDEEP.
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center">
-            {NAV.map((n, idx) => {
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+            {NAV.map((n) => {
               const active = pathname === n.href
               return (
-                <div key={n.href} className="flex items-center">
-                  <Link href={n.href} className="relative">
-                    <motion.div
-                      className={`px-3 py-2 text-sm font-body transition-colors relative z-10 ${
-                        active ? 'text-primary font-medium' : 'text-text-secondary hover:text-primary'
-                      }`}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      {active && (
-                        <motion.span
-                          layoutId="nav-underline"
-                          transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-                          className="absolute left-3 right-3 bottom-1 h-[2px] bg-gold rounded-full -z-10"
-                        />
-                      )}
-                      <span>{n.label}</span>
-                    </motion.div>
-                  </Link>
-                  {idx < NAV.length - 1 && (
-                    <span className="text-border mx-1 font-light">|</span>
-                  )}
-                </div>
+                <Link
+                  key={n.href}
+                  href={n.href}
+                  className={`px-3.5 py-1.5 rounded-full text-sm font-body font-medium transition-all ${
+                    active
+                      ? 'text-primary bg-primary/5 font-semibold'
+                      : 'text-text-secondary hover:text-primary hover:bg-primary/5'
+                  }`}
+                >
+                  <span className="relative">
+                    {n.label}
+                    {active && (
+                      <span className="absolute -bottom-1 left-0 right-0 h-[2px] bg-gold rounded-full" />
+                    )}
+                  </span>
+                </Link>
               )
             })}
-          </div>
+          </nav>
 
-          {/* Hire Me Button */}
+          {/* Desktop Action Button */}
           <div className="hidden md:block">
-            <Link href="/contact">
-              <motion.div
-                className="flex items-center gap-2 px-6 py-2.5 rounded shadow-md font-body font-medium text-sm bg-gold-solid hover:opacity-90 transition-opacity cursor-pointer"
-                whileHover={{ scale: 1.05, y: -1 }}
-                whileTap={{ scale: 0.97 }}
-              >
-                Hire Me
-              </motion.div>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center px-5 py-2 rounded-full font-body font-semibold text-xs tracking-wide bg-gold-solid text-primary shadow-sm hover:opacity-90 hover:shadow transition-all"
+            >
+              Hire Me
             </Link>
           </div>
 
-          {/* Mobile toggle */}
-          <motion.button
-            className="md:hidden text-primary p-2 rounded-lg hover:bg-primary/5 transition-colors"
+          {/* Mobile Menu Hamburger Toggle */}
+          <button
+            type="button"
+            className="md:hidden text-primary p-2 rounded-lg hover:bg-primary/5 active:bg-primary/10 transition-colors focus:outline-none"
             onClick={() => setOpen(!open)}
-            whileTap={{ scale: 0.9 }}
-            aria-label="Toggle navigation menu"
+            aria-label={open ? 'Close menu' : 'Open navigation menu'}
           >
             {open ? <X size={24} /> : <Menu size={24} />}
-          </motion.button>
+          </button>
         </div>
-      </motion.nav>
+      </header>
 
-      {/* Mobile menu */}
+      {/* Mobile Drawer Overlay */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-bg/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 md:hidden px-6 pt-20 pb-12"
+            className="fixed inset-0 z-40 bg-bg/98 backdrop-blur-2xl md:hidden flex flex-col justify-between px-6 pt-24 pb-8 overflow-y-auto"
+            onClick={() => setOpen(false)}
           >
-            <div className="flex flex-col items-center gap-6 w-full max-w-xs">
-              {NAV.map((n, i) => {
+            <div
+              className="flex flex-col items-center gap-6 w-full max-w-xs mx-auto my-auto"
+              onClick={(e) => e.stopPropagation()}
+            >
+              {NAV.map((n) => {
                 const active = pathname === n.href
                 return (
-                  <motion.div
+                  <Link
                     key={n.href}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: i * 0.05 }}
-                    className="w-full text-center"
+                    href={n.href}
+                    onClick={() => setOpen(false)}
+                    className={`font-display font-bold text-3xl sm:text-4xl transition-colors py-1 ${
+                      active ? 'text-gold' : 'text-primary hover:text-gold'
+                    }`}
                   >
-                    <Link
-                      href={n.href}
-                      onClick={() => setOpen(false)}
-                      className={`font-display font-bold text-3xl sm:text-4xl block py-1.5 transition-colors ${
-                        active ? 'text-gold' : 'text-primary hover:text-gold'
-                      }`}
-                    >
-                      {n.label}
-                    </Link>
-                  </motion.div>
+                    {n.label}
+                  </Link>
                 )
               })}
 
-              <div className="w-16 h-px bg-border my-2" />
+              <div className="w-16 h-px bg-border/80 my-2" />
 
-              {/* Mobile Action Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.25 }}
-                className="w-full flex flex-col gap-3"
-              >
+              {/* Mobile Actions */}
+              <div className="w-full flex flex-col gap-3">
                 <Link
                   href="/contact"
                   onClick={() => setOpen(false)}
-                  className="w-full py-3 rounded-lg text-center font-body font-semibold text-sm bg-gold-solid text-primary shadow-md block"
+                  className="w-full py-3 rounded-full text-center font-body font-semibold text-sm bg-gold-solid text-primary shadow-md block hover:opacity-90 transition-opacity"
                 >
                   Hire Me
                 </Link>
@@ -155,11 +156,12 @@ export default function Navbar() {
                 <a
                   href="/Sandeep_Kumar_Resume.pdf"
                   download
-                  className="w-full py-3 rounded-lg text-center font-body font-semibold text-sm bg-primary text-surface border border-border shadow-sm flex items-center justify-center gap-2"
+                  onClick={() => setOpen(false)}
+                  className="w-full py-3 rounded-full text-center font-body font-semibold text-sm bg-primary text-surface border border-primary shadow-sm flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors"
                 >
                   <Download size={16} /> Download Resume
                 </a>
-              </motion.div>
+              </div>
             </div>
           </motion.div>
         )}
