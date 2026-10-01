@@ -7,6 +7,7 @@ import {
   Github,
   Layers,
   ArrowRight,
+  ArrowDown,
   Cpu,
   Database,
   Globe,
@@ -144,7 +145,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 md:p-10 overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 md:p-6 lg:p-10 overflow-y-auto">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -161,7 +162,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-            className="relative w-full max-w-4xl bg-bg rounded-2xl shadow-2xl border border-gold/30 overflow-hidden z-10 max-h-[90vh] flex flex-col"
+            className="relative w-full max-w-4xl bg-bg rounded-2xl shadow-2xl border border-gold/30 overflow-hidden z-10 max-h-[92vh] flex flex-col"
             onClick={(e) => e.stopPropagation()}
             role="dialog"
             aria-modal="true"
@@ -170,21 +171,21 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             <div className="h-1.5 w-full bg-gradient-to-r from-gold via-primary to-gold" />
 
             {/* Modal Header */}
-            <div className="flex items-start justify-between p-6 md:p-8 border-b border-border/60 bg-surface/50">
-              <div className="space-y-1.5 pr-8">
+            <div className="flex items-start justify-between p-4 sm:p-6 md:p-8 border-b border-border/60 bg-surface/50">
+              <div className="space-y-1.5 pr-4 sm:pr-8">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="px-3 py-0.5 rounded-full text-xs font-mono font-semibold bg-gold/15 text-primary border border-gold/40">
+                  <span className="px-2.5 sm:px-3 py-0.5 rounded-full text-[11px] sm:text-xs font-mono font-semibold bg-gold/15 text-primary border border-gold/40">
                     {project.badge || 'Project Architecture'}
                   </span>
-                  <span className="inline-flex items-center gap-1 text-xs font-body text-text-secondary">
-                    <Workflow size={14} className="text-gold" />
-                    System Architecture & Engineering Breakdown
+                  <span className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-body text-text-secondary">
+                    <Workflow size={13} className="text-gold" />
+                    System Architecture Breakdown
                   </span>
                 </div>
-                <h3 className="font-display font-bold text-2xl md:text-3xl text-primary tracking-tight">
+                <h3 className="font-display font-bold text-xl sm:text-2xl md:text-3xl text-primary tracking-tight">
                   {project.title}
                 </h3>
-                <p className="font-body text-sm text-text-secondary">
+                <p className="font-body text-xs sm:text-sm text-text-secondary">
                   {project.subtitle}
                 </p>
               </div>
@@ -192,56 +193,56 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               {/* Close Button */}
               <button
                 onClick={onClose}
-                className="group p-2.5 rounded-full bg-primary/5 hover:bg-primary text-primary hover:text-white transition-all duration-200 border border-border hover:border-primary flex-shrink-0"
+                className="group p-2 sm:p-2.5 rounded-full bg-primary/5 hover:bg-primary text-primary hover:text-white transition-all duration-200 border border-border hover:border-primary flex-shrink-0"
                 aria-label="Close dialog"
               >
-                <X size={20} className="transition-transform group-hover:rotate-90 duration-300" />
+                <X size={18} className="sm:w-5 sm:h-5 transition-transform group-hover:rotate-90 duration-300" />
               </button>
             </div>
 
             {/* Scrollable Body */}
-            <div className="p-6 md:p-8 overflow-y-auto space-y-8 flex-1">
+            <div className="p-4 sm:p-6 md:p-8 overflow-y-auto space-y-6 sm:space-y-8 flex-1">
               {/* Executive Overview */}
               <div>
-                <h4 className="font-body font-bold text-sm uppercase tracking-wider text-gold mb-2 flex items-center gap-2">
-                  <Sparkles size={16} />
+                <h4 className="font-body font-bold text-xs sm:text-sm uppercase tracking-wider text-gold mb-2 flex items-center gap-2">
+                  <Sparkles size={15} />
                   Overview & Problem Solved
                 </h4>
-                <p className="font-body text-text-primary/90 text-sm md:text-base leading-relaxed bg-surface/60 p-4 rounded-xl border border-border/50">
+                <p className="font-body text-text-primary/90 text-xs sm:text-sm md:text-base leading-relaxed bg-surface/60 p-3.5 sm:p-4 rounded-xl border border-border/50">
                   {arch.overview}
                 </p>
               </div>
 
               {/* System Architecture Flow Diagram */}
               <div>
-                <div className="flex items-center justify-between mb-4">
-                  <h4 className="font-body font-bold text-sm uppercase tracking-wider text-gold flex items-center gap-2">
-                    <Workflow size={16} />
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                  <h4 className="font-body font-bold text-xs sm:text-sm uppercase tracking-wider text-gold flex items-center gap-2">
+                    <Workflow size={15} />
                     System Architecture Flow Diagram
                   </h4>
-                  <span className="text-[11px] font-mono text-text-muted">
-                    End-to-End Data Pipeline
+                  <span className="text-[10px] sm:text-[11px] font-mono text-text-muted">
+                    End-to-End Pipeline
                   </span>
                 </div>
 
                 {/* Interactive Diagram Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-3 relative">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-2.5 sm:gap-3 relative">
                   {arch.diagram.map((node, idx) => (
                     <div key={node.step} className="relative flex flex-col">
-                      <div className="bg-surface rounded-xl p-4 border border-border/70 hover:border-gold/60 transition-all hover:shadow-md flex-1 flex flex-col justify-between group">
+                      <div className="bg-surface rounded-xl p-3.5 sm:p-4 border border-border/70 hover:border-gold/60 transition-all hover:shadow-md flex-1 flex flex-col justify-between group">
                         <div>
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="text-xs font-mono font-bold text-gold px-2 py-0.5 rounded bg-gold/10 border border-gold/20">
+                          <div className="flex items-center justify-between mb-2 sm:mb-3">
+                            <span className="text-[11px] sm:text-xs font-mono font-bold text-gold px-2 py-0.5 rounded bg-gold/10 border border-gold/20">
                               STEP {node.step}
                             </span>
-                            <div className="p-1.5 rounded-lg bg-primary/5 group-hover:bg-primary/10 transition-colors">
+                            <div className="p-1 sm:p-1.5 rounded-lg bg-primary/5 group-hover:bg-primary/10 transition-colors">
                               {getTypeIcon(node.type)}
                             </div>
                           </div>
-                          <h5 className="font-body font-bold text-primary text-sm mb-1">
+                          <h5 className="font-body font-bold text-primary text-xs sm:text-sm mb-1">
                             {node.title}
                           </h5>
-                          <p className="text-xs font-mono text-gold font-medium mb-2">
+                          <p className="text-[11px] sm:text-xs font-mono text-gold font-medium mb-1.5 sm:mb-2">
                             {node.tech}
                           </p>
                           <p className="text-xs text-text-secondary leading-relaxed font-body">
@@ -254,6 +255,13 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                       {idx < arch.diagram.length - 1 && (
                         <div className="hidden md:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 text-gold/60 pointer-events-none">
                           <ArrowRight size={18} />
+                        </div>
+                      )}
+
+                      {/* Arrow for mobile (< md) */}
+                      {idx < arch.diagram.length - 1 && (
+                        <div className="flex md:hidden justify-center py-1 text-gold/60">
+                          <ArrowDown size={16} />
                         </div>
                       )}
                     </div>

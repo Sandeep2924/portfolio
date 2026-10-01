@@ -48,36 +48,36 @@ function Item({ item, index }: { item: typeof ITEMS[0]; index: number }) {
       initial={{ opacity:0, y: 20 }}
       animate={inView ? { opacity:1, y:0 } : {}}
       transition={{ duration:0.6, ease:[0.22,1,0.36,1] }}
-      className="relative flex gap-6 group"
+      className="relative flex gap-3.5 sm:gap-6 group"
     >
       {/* Timeline Line & Icon */}
-      <div className="flex flex-col items-center flex-shrink-0 w-12">
-        <div className="w-12 h-12 rounded flex items-center justify-center bg-primary text-gold shadow-md z-10 transition-transform group-hover:scale-110">
-          <Icon size={20} />
+      <div className="flex flex-col items-center flex-shrink-0 w-9 sm:w-12">
+        <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center bg-primary text-gold shadow-md z-10 transition-transform group-hover:scale-110 flex-shrink-0">
+          <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
         </div>
         {index < ITEMS.length - 1 && (
-          <div className="w-px flex-1 mt-4 mb-4 bg-border" />
+          <div className="w-px flex-1 mt-3 mb-3 bg-border" />
         )}
       </div>
 
       {/* Card Content */}
-      <div className="pb-12 flex-1 min-w-0">
-        <div className="bg-surface rounded border border-border/50 p-6 shadow-sm hover:shadow-md transition-shadow">
-          <div className="flex flex-col md:flex-row md:items-start justify-between gap-2 mb-4 border-b border-border/40 pb-4">
+      <div className="pb-8 sm:pb-12 flex-1 min-w-0">
+        <div className="bg-surface rounded-xl border border-border/60 p-4 sm:p-6 shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 mb-3 sm:mb-4 border-b border-border/40 pb-3 sm:pb-4">
             <div className="min-w-0">
-              <h3 className="font-body font-bold text-lg text-primary leading-snug">{item.title}</h3>
-              <p className="text-sm font-medium text-gold mt-1 uppercase tracking-wide">{item.org}</p>
+              <h3 className="font-body font-bold text-base sm:text-lg text-primary leading-snug">{item.title}</h3>
+              <p className="text-xs sm:text-sm font-medium text-gold mt-1 uppercase tracking-wide">{item.org}</p>
               {item.loc && <p className="font-body text-xs text-text-secondary mt-1">{item.loc}</p>}
             </div>
-            <span className="font-body text-xs font-semibold text-primary bg-gold/10 px-3 py-1.5 rounded flex-shrink-0 border border-gold/20">
+            <span className="font-body text-[11px] sm:text-xs font-semibold text-primary bg-gold/10 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded self-start sm:self-auto flex-shrink-0 border border-gold/20">
               {item.period}
             </span>
           </div>
-          <ul className="space-y-2.5">
+          <ul className="space-y-2 sm:space-y-2.5">
             {item.bullets.map((b,i) => (
-              <li key={i} className="flex gap-3 text-sm text-text-primary/80 font-body leading-relaxed">
-                <span className="flex-shrink-0 mt-2 w-1.5 h-1.5 rounded-full bg-gold" />
-                {b}
+              <li key={i} className="flex gap-2.5 sm:gap-3 text-xs sm:text-sm text-text-primary/80 font-body leading-relaxed">
+                <span className="flex-shrink-0 mt-1.5 sm:mt-2 w-1.5 h-1.5 rounded-full bg-gold" />
+                <span>{b}</span>
               </li>
             ))}
           </ul>
@@ -89,13 +89,13 @@ function Item({ item, index }: { item: typeof ITEMS[0]; index: number }) {
 
 export default function Education() {
   return (
-    <section id="education" className="pb-24 pt-12 px-6 relative bg-bg">
+    <section id="education" className="pb-16 sm:pb-24 pt-8 sm:pt-12 px-4 sm:px-6 relative bg-bg">
       <div className="max-w-4xl mx-auto">
-        <Reveal className="text-center mb-20">
-          <h2 className="font-display font-extrabold text-4xl md:text-5xl text-primary uppercase tracking-tight">
+        <Reveal className="text-center mb-12 sm:mb-16">
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-primary uppercase tracking-tight">
             Education & Research
           </h2>
-          <p className="text-text-secondary mt-4 max-w-xl mx-auto font-body">
+          <p className="text-text-secondary mt-3 max-w-xl mx-auto font-body text-sm sm:text-base">
             A timeline of my academic background and scientific contributions.
           </p>
         </Reveal>

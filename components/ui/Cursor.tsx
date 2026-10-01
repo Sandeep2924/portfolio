@@ -12,6 +12,10 @@ export default function Cursor() {
 
     let mx = 0, my = 0, rx = 0, ry = 0
 
+    if (typeof window !== 'undefined' && !window.matchMedia('(pointer: fine)').matches) {
+      return
+    }
+
     const onMove = (e: MouseEvent) => { mx = e.clientX; my = e.clientY }
     window.addEventListener('mousemove', onMove)
 
@@ -30,9 +34,9 @@ export default function Cursor() {
   }, [])
 
   return (
-    <>
+    <div className="hidden md:block">
       <div ref={dotRef}  className="cursor-dot"  />
       <div ref={ringRef} className="cursor-ring" />
-    </>
+    </div>
   )
 }

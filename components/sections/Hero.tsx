@@ -24,10 +24,10 @@ export default function Hero() {
   ]
 
   return (
-    <section className="relative min-h-screen flex items-center pt-24 pb-12 px-6 overflow-hidden max-w-7xl mx-auto">
+    <section className="relative min-h-[90vh] flex items-center pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 overflow-hidden max-w-7xl mx-auto">
       
-      {/* Floating Social Icons (Left Edge) */}
-      <div className="absolute left-6 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-20 hidden md:flex">
+      {/* Floating Social Icons (Desktop Left Edge) */}
+      <div className="absolute left-6 top-1/2 -translate-y-1/2 flex-col gap-6 z-20 hidden md:flex">
         {SOCIALS.map(({ icon: Icon, href, label }) => (
           <motion.a 
             key={label} 
@@ -44,15 +44,15 @@ export default function Hero() {
         ))}
       </div>
 
-      <div className="relative z-10 w-full grid md:grid-cols-2 gap-12 items-center md:pl-24">
+      <div className="relative z-10 w-full grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-12 items-center md:pl-20 lg:pl-24">
         
         {/* LEFT: Text */}
-        <div>
+        <div className="text-left">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display font-black text-6xl md:text-8xl leading-[1.05] tracking-tight mb-6 text-primary"
+            className="font-display font-black text-4xl sm:text-6xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight mb-4 sm:mb-6 text-primary"
           >
             I'M <br /> SANDEEP.
           </motion.h1>
@@ -61,16 +61,16 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="font-body text-2xl md:text-3xl text-primary font-medium mb-6 leading-snug"
+            className="font-body text-xl sm:text-2xl md:text-3xl text-primary font-medium mb-4 sm:mb-6 leading-snug"
           >
-            Fusing Design Thinking <br /> with Engineering Precision.
+            Fusing Design Thinking <br className="hidden sm:inline" /> with Engineering Precision.
           </motion.h2>
 
           <motion.p 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ delay: 0.3, duration: 0.6 }}
-            className="text-text-primary text-base md:text-lg leading-relaxed mb-10 max-w-lg font-body"
+            className="text-text-primary text-sm sm:text-base md:text-lg leading-relaxed mb-8 sm:mb-10 max-w-lg font-body"
           >
             I am a multi-disciplinary creative professional with a passion for building <span className="font-bold">user-centric digital experiences</span>. 
             I bring complex ideas to life through robust frontend development and intuitive UI/UX design. Let's create something remarkable.
@@ -80,16 +80,33 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ delay: 0.4 }}
+            className="flex flex-wrap items-center gap-4 sm:gap-6"
           >
             <Link href="/projects">
               <motion.button
-                className="px-8 py-3.5 rounded shadow-lg font-body font-medium text-sm bg-gold-grad tracking-wide hover:opacity-90 transition-opacity"
+                className="px-7 sm:px-8 py-3 sm:py-3.5 rounded shadow-lg font-body font-medium text-xs sm:text-sm bg-gold-grad tracking-wide hover:opacity-90 transition-opacity"
                 whileHover={{ scale: 1.05, y: -2 }} 
                 whileTap={{ scale: 0.97 }}
               >
                 VIEW PROJECTS
               </motion.button>
             </Link>
+
+            {/* Mobile Social Bar (Shown on small screens) */}
+            <div className="flex items-center gap-3 md:hidden">
+              {SOCIALS.map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="w-9 h-9 rounded bg-surface border border-border flex items-center justify-center text-primary hover:border-gold transition-colors shadow-sm"
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
+            </div>
           </motion.div>
         </div>
 
@@ -98,18 +115,18 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.95 }} 
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="flex justify-center md:justify-end relative pr-4 md:pr-12"
+          className="flex justify-center md:justify-end relative w-full pt-4 md:pt-0"
         >
-          <div className="relative w-72 h-[400px] md:w-[420px] md:h-[560px]">
+          <div className="relative w-full max-w-[280px] sm:max-w-xs md:max-w-[380px] lg:max-w-[420px] aspect-[3/4]">
             {/* Dark Navy Outer Frame */}
-            <div className="absolute inset-0 bg-primary shadow-2xl z-0" />
+            <div className="absolute inset-0 bg-primary shadow-2xl z-0 rounded-sm" />
             
             {/* Gold Corner Accents (Top Left & Bottom Right) */}
-            <div className="absolute -top-1 -left-1 w-16 h-16 bg-gold z-0" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }} />
-            <div className="absolute -bottom-1 -right-1 w-16 h-16 bg-gold z-0" style={{ clipPath: 'polygon(100% 100%, 100% 0, 0 100%)' }} />
+            <div className="absolute -top-1 -left-1 w-12 h-12 sm:w-16 sm:h-16 bg-gold z-0" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }} />
+            <div className="absolute -bottom-1 -right-1 w-12 h-12 sm:w-16 sm:h-16 bg-gold z-0" style={{ clipPath: 'polygon(100% 100%, 100% 0, 0 100%)' }} />
 
             {/* Inner White Frame & Image */}
-            <div className="absolute inset-4 bg-surface p-2 z-10 flex items-center justify-center overflow-hidden">
+            <div className="absolute inset-3 sm:inset-4 bg-surface p-2 z-10 flex items-center justify-center overflow-hidden">
               <img
                 src={PHOTO_URL}
                 alt="Sandeep"

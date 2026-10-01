@@ -38,9 +38,9 @@ export default function Navbar() {
           scrolled ? 'bg-bg/75 backdrop-blur-2xl border-b border-border py-3' : 'py-5'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="font-display font-bold text-2xl tracking-tight text-primary hover:opacity-80 transition-opacity">
+          <Link href="/" className="font-display font-bold text-xl sm:text-2xl tracking-tight text-primary hover:opacity-80 transition-opacity">
             SANDEEP.
           </Link>
 
@@ -80,7 +80,7 @@ export default function Navbar() {
           <div className="hidden md:block">
             <Link href="/contact">
               <motion.div
-                className="flex items-center gap-2 px-6 py-2.5 rounded shadow-md font-body font-medium text-sm bg-gold-solid hover:opacity-90 transition-opacity"
+                className="flex items-center gap-2 px-6 py-2.5 rounded shadow-md font-body font-medium text-sm bg-gold-solid hover:opacity-90 transition-opacity cursor-pointer"
                 whileHover={{ scale: 1.05, y: -1 }}
                 whileTap={{ scale: 0.97 }}
               >
@@ -90,8 +90,13 @@ export default function Navbar() {
           </div>
 
           {/* Mobile toggle */}
-          <motion.button className="md:hidden text-text-primary p-2" onClick={() => setOpen(!open)} whileTap={{ scale: 0.9 }}>
-            {open ? <X size={22} /> : <Menu size={22} />}
+          <motion.button
+            className="md:hidden text-primary p-2 rounded-lg hover:bg-primary/5 transition-colors"
+            onClick={() => setOpen(!open)}
+            whileTap={{ scale: 0.9 }}
+            aria-label="Toggle navigation menu"
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
         </div>
       </motion.nav>
@@ -100,43 +105,62 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-bg/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-8 md:hidden"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-40 bg-bg/98 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 md:hidden px-6 pt-20 pb-12"
           >
-            {NAV.map((n, i) => {
-              const active = pathname === n.href
-              return (
-                <motion.div
-                  key={n.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.07 }}
-                >
-                  <Link
-                    href={n.href}
-                    onClick={() => setOpen(false)}
-                    className={`font-display font-bold text-4xl hover:text-primary transition-colors ${
-                      active ? 'text-primary' : 'text-text-primary'
-                    }`}
+            <div className="flex flex-col items-center gap-6 w-full max-w-xs">
+              {NAV.map((n, i) => {
+                const active = pathname === n.href
+                return (
+                  <motion.div
+                    key={n.href}
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: i * 0.05 }}
+                    className="w-full text-center"
                   >
-                    {n.label}
-                  </Link>
-                </motion.div>
-              )
-            })}
-            <motion.a
-              href="/Sandeep_Kumar_Resume.pdf"
-              download
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex items-center gap-2 px-8 py-3 rounded-full font-display font-bold text-bg"
-              style={{ background: 'linear-gradient(135deg,#6EE7B7,#60A5FA)' }}
-            >
-              <Download size={16} /> Download Resume
-            </motion.a>
+                    <Link
+                      href={n.href}
+                      onClick={() => setOpen(false)}
+                      className={`font-display font-bold text-3xl sm:text-4xl block py-1.5 transition-colors ${
+                        active ? 'text-gold' : 'text-primary hover:text-gold'
+                      }`}
+                    >
+                      {n.label}
+                    </Link>
+                  </motion.div>
+                )
+              })}
+
+              <div className="w-16 h-px bg-border my-2" />
+
+              {/* Mobile Action Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25 }}
+                className="w-full flex flex-col gap-3"
+              >
+                <Link
+                  href="/contact"
+                  onClick={() => setOpen(false)}
+                  className="w-full py-3 rounded-lg text-center font-body font-semibold text-sm bg-gold-solid text-primary shadow-md block"
+                >
+                  Hire Me
+                </Link>
+
+                <a
+                  href="/Sandeep_Kumar_Resume.pdf"
+                  download
+                  className="w-full py-3 rounded-lg text-center font-body font-semibold text-sm bg-primary text-surface border border-border shadow-sm flex items-center justify-center gap-2"
+                >
+                  <Download size={16} /> Download Resume
+                </a>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

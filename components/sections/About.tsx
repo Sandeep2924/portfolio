@@ -19,48 +19,48 @@ export default function About() {
   const { ref, inView } = useInView({ triggerOnce:true, threshold:0.1 })
 
   return (
-    <section id="about" className="py-28 px-6 relative overflow-hidden">
+    <section id="about" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none"
-        style={{ background:'radial-gradient(circle, rgba(244,114,182,0.07) 0%, transparent 70%)' }} />
+        style={{ background:'radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%)' }} />
 
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <Reveal className="text-center mb-16">
+        <Reveal className="text-center mb-12 sm:mb-16">
           <p className="section-label mb-3">01 / About Me</p>
-          <h2 className="font-display font-extrabold text-4xl md:text-6xl leading-tight">
-            The Person <span className="gt-mint">Behind the Code</span>
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl leading-tight text-primary">
+            The Person Behind the Code
           </h2>
         </Reveal>
 
-        <div className="grid md:grid-cols-2 gap-14 items-center">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-center">
 
           {/* Photo side */}
           <Reveal dir="left">
-            <div className="relative flex justify-center">
+            <div className="relative flex justify-center py-4">
               {/* Decorative elements */}
-              <div className="absolute -top-4 -left-4 w-48 h-48 rounded-2xl border border-primary/10"
-                style={{ background:'linear-gradient(135deg, rgba(110,231,183,0.05), transparent)' }} />
-              <div className="absolute -bottom-4 -right-4 w-48 h-48 rounded-2xl border border-secondary/10"
-                style={{ background:'linear-gradient(135deg, rgba(244,114,182,0.05), transparent)' }} />
+              <div className="absolute -top-2 -left-2 sm:-top-4 sm:-left-4 w-40 sm:w-48 h-40 sm:h-48 rounded-2xl border border-primary/10"
+                style={{ background:'linear-gradient(135deg, rgba(212,175,55,0.05), transparent)' }} />
+              <div className="absolute -bottom-2 -right-2 sm:-bottom-4 sm:-right-4 w-40 sm:w-48 h-40 sm:h-48 rounded-2xl border border-gold/20"
+                style={{ background:'linear-gradient(135deg, rgba(212,175,55,0.05), transparent)' }} />
 
               {/* Main photo */}
-              <div className="relative w-72 h-80 rounded-3xl overflow-hidden border border-border glow-mint z-10">
+              <div className="relative w-64 h-72 sm:w-72 sm:h-80 rounded-2xl overflow-hidden border border-border shadow-lg z-10">
                 <img src={PHOTO2} alt="Sandeep Kumar" className="w-full h-full object-cover object-top" />
                 <div className="absolute inset-0"
-                  style={{ background:'linear-gradient(to top, rgba(5,5,8,0.6) 0%, transparent 50%)' }} />
+                  style={{ background:'linear-gradient(to top, rgba(15,23,42,0.7) 0%, transparent 50%)' }} />
                 <div className="absolute bottom-4 left-4 right-4">
-                  <p className="font-display font-bold text-text-primary">Sandeep Kumar</p>
-                  <p className="font-mono text-xs text-primary">AI/ML Engineer · Full Stack Dev</p>
+                  <p className="font-display font-bold text-surface text-base sm:text-lg">Sandeep Kumar</p>
+                  <p className="font-mono text-xs text-gold">AI/ML Engineer · Full Stack Dev</p>
                 </div>
               </div>
 
               {/* Floating card */}
-              <motion.div animate={{ y:[0,-8,0] }} transition={{ duration:4, repeat:Infinity, ease:'easeInOut' }}
-                className="absolute -right-4 top-8 card-glass rounded-2xl px-4 py-3 border border-border z-20"
+              <motion.div animate={{ y:[0,-6,0] }} transition={{ duration:4, repeat:Infinity, ease:'easeInOut' }}
+                className="absolute right-0 sm:-right-4 top-2 sm:top-6 bg-surface rounded-xl px-3.5 py-2.5 sm:px-4 sm:py-3 border border-border shadow-md z-20"
               >
-                <p className="font-mono text-xs text-text-muted mb-0.5">Currently at</p>
-                <p className="font-display font-semibold text-sm text-text-primary">CHRIST University</p>
-                <p className="font-mono text-xs text-primary">Delhi NCR</p>
+                <p className="font-mono text-[10px] text-text-muted mb-0.5">Currently at</p>
+                <p className="font-body font-bold text-xs sm:text-sm text-primary">CHRIST University</p>
+                <p className="font-mono text-[11px] text-gold">Delhi NCR</p>
               </motion.div>
             </div>
           </Reveal>

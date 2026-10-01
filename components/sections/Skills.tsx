@@ -52,7 +52,7 @@ function SkillPill({ skill, index }: { skill: { name: string; desc: string }; in
       </div>
       
       {/* Tooltip */}
-      <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-1.5 rounded text-xs font-body bg-primary text-surface opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none z-50">
+      <div className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-3 py-1.5 rounded text-xs font-body bg-primary text-surface opacity-0 group-hover:opacity-100 transition-opacity max-w-[220px] sm:max-w-xs text-center whitespace-normal pointer-events-none z-50 shadow-lg">
         {skill.desc}
         <div className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-l-transparent border-r-4 border-r-transparent border-t-4 border-t-primary" />
       </div>
@@ -63,18 +63,20 @@ function SkillPill({ skill, index }: { skill: { name: string; desc: string }; in
 function CategoryCard({ cat, delay }: { cat: typeof CATEGORIES[0]; delay: number }) {
   return (
     <Reveal delay={delay}>
-      <div className="rounded border border-border/50 bg-card p-8 h-full shadow-lg hover:shadow-xl transition-shadow">
-        <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border/40">
-          <span className="text-2xl">{cat.icon}</span>
-          <h3 className="font-body font-bold text-lg text-primary tracking-wide uppercase">
-            {cat.title}
-          </h3>
-        </div>
+      <div className="rounded-xl border border-border/60 bg-card p-5 sm:p-7 h-full shadow-lg hover:shadow-xl transition-shadow flex flex-col justify-between">
+        <div>
+          <div className="flex items-center gap-3 mb-5 pb-4 border-b border-border/40">
+            <span className="text-2xl">{cat.icon}</span>
+            <h3 className="font-body font-bold text-base sm:text-lg text-primary tracking-wide uppercase">
+              {cat.title}
+            </h3>
+          </div>
 
-        <div className="flex flex-wrap gap-2.5">
-          {cat.skills.map((s, i) => (
-            <SkillPill key={s.name} skill={s} index={i} />
-          ))}
+          <div className="flex flex-wrap gap-2">
+            {cat.skills.map((s, i) => (
+              <SkillPill key={s.name} skill={s} index={i} />
+            ))}
+          </div>
         </div>
       </div>
     </Reveal>
@@ -83,18 +85,18 @@ function CategoryCard({ cat, delay }: { cat: typeof CATEGORIES[0]; delay: number
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-6 relative bg-surface/30">
+    <section id="skills" className="py-16 sm:py-24 px-4 sm:px-6 relative bg-surface/30">
       <div className="max-w-6xl mx-auto">
-        <Reveal className="text-center mb-16">
-          <h2 className="font-display font-extrabold text-4xl md:text-5xl text-primary uppercase tracking-tight">
+        <Reveal className="text-center mb-12 sm:mb-16">
+          <h2 className="font-display font-extrabold text-3xl sm:text-4xl md:text-5xl text-primary uppercase tracking-tight">
             Technical Expertise
           </h2>
-          <p className="mt-4 max-w-xl mx-auto text-text-secondary font-body">
+          <p className="mt-3 max-w-xl mx-auto text-text-secondary text-sm sm:text-base font-body">
             Hover over any skill to see its application context.
           </p>
         </Reveal>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {CATEGORIES.map((cat, i) => (
             <CategoryCard key={cat.title} cat={cat} delay={i * 0.1} />
           ))}
