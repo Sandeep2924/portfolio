@@ -15,6 +15,21 @@ import Reveal from '../ui/Reveal'
 
 export const PROJECTS = [
   {
+    id: 6,
+    title: "RetainAI",
+    subtitle: "AI Customer Retention Dashboard",
+    desc: "An intelligent full-stack application designed to analyze customer behavior, predict churn, and optimize retention strategies using machine learning models.",
+    tags: ["React.js", "Node.js", "AI/ML", "Analytics"],
+    icon: TrendingUp,
+    color: "#D4AF37",
+    grad: "from-[#D4AF37]/20 to-[#FBBF24]/20",
+    badge: "AI / Full Stack",
+    github: "https://github.com/Sandeep2924/RetainAI",
+    live: "https://retain-ai-olive.vercel.app/",
+    img: null,
+    featured: true,
+  },
+  {
     id: 1,
     title: "Zyagra",
     subtitle: "Smart Agri-Commerce Platform",
