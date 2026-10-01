@@ -1,6 +1,5 @@
 'use client'
 import { motion } from 'framer-motion'
-import { useInView } from 'react-intersection-observer'
 import Reveal from '../ui/Reveal'
 
 // Local photo
@@ -16,8 +15,6 @@ const STATS = [
 const TAGS = ['Python','React','Next.js','Node.js','MongoDB','LSTM','NLP','LLMs','TypeScript','Express.js','MySQL','Git','Tailwind','Bootstrap']
 
 export default function About() {
-  const { ref, inView } = useInView({ triggerOnce:true, threshold:0.1 })
-
   return (
     <section id="about" className="py-16 sm:py-24 px-4 sm:px-6 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full pointer-events-none"
@@ -106,14 +103,16 @@ export default function About() {
         </div>
 
         {/* Stats row */}
-        <div ref={ref} className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16">
           {STATS.map(({ value, label, color }, i) => (
             <motion.div key={label}
-              initial={{ opacity:0, y:30 }} animate={inView ? { opacity:1, y:0 } : {}}
-              transition={{ delay: i*0.1+0.2, duration:0.5 }}
-              className="card-glass rounded-2xl p-6 text-center border border-border card-hover"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.08 + 0.1, duration: 0.4 }}
+              className="card-glass rounded-2xl p-5 sm:p-6 text-center border border-border shadow-sm card-hover"
             >
-              <p className="font-display font-extrabold text-4xl mb-1" style={{ color }}>{value}</p>
+              <p className="font-display font-extrabold text-3xl sm:text-4xl mb-1" style={{ color }}>{value}</p>
               <p className="font-mono text-xs text-text-secondary">{label}</p>
             </motion.div>
           ))}

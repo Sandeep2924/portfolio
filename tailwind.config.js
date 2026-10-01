@@ -4,9 +4,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Playfair Display"', 'serif'],
-        body: ['"DM Sans"', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'monospace'],
+        display: ['var(--font-playfair)', '"Playfair Display"', 'serif'],
+        body: ['var(--font-dmsans)', '"DM Sans"', 'sans-serif'],
+        mono: ['var(--font-jetbrains)', '"JetBrains Mono"', 'monospace'],
       },
       colors: {
         bg: '#FDFBF7',
