@@ -14,7 +14,7 @@ const BehanceIcon = ({ size = 24 }: { size?: number }) => (
   </svg>
 )
 
-const PHOTO_URL = '/sandeep.png'
+const PHOTO_URL = '/sandeep.jpg'
 
 export default function Hero() {
   const SOCIALS = [

@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import Reveal from '../ui/Reveal'
 
 // Local photo
-const PHOTO2 = '/sandeep.png'
+const PHOTO2 = '/sandeep.jpg'
 
 const STATS = [
   { value:'9+',  label:'Months Experience', color:'#6EE7B7' },
